@@ -1,0 +1,26 @@
+<div class="container">
+<h1>Пользователи</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Имя</th>
+      <th scope="col">Администратор</th>
+      <th scope="col">Изменить роль</th>
+    </tr>
+  </thead>
+  <tbody>
+<% @users.each do |user| %>
+<tr>
+  <td><%= user.id %></td>
+  <td><%= user.name %></td>
+  <% if user.admin? %>
+  <td>Да</td>
+  <td><%= button_to "Забрать права", user_url(user), method: :put, class: "btn btn-warning" %></td>
+  <% else %>
+  <td>Нет</td>
+  <td><%= button_to "Сделать Админом", user_url(user), method: :put, class: "btn btn-warning" %></td>
+  <% end %>
+</tr>
+<% end %>
+</div>

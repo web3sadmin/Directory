@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Directory</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div class="container">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Справочник</a>
+        </div>
+        <%= render 'layouts/navbar' %>
+        <ul class="nav navbar-nav navbar-right">
+          <li id="notice" class="next"><a href="#"><%= notice %></a></li>
+          <li style="padding-top: 16px;">
+          <% if user_signed_in? %>Привет,
+            <% if current_user.admin? %>Admin
+            <li class="pull-right"><%= link_to('', destroy_user_session_path, :method => :delete, :class => "glyphicon glyphicon-log-out") %></a></li>
+              <% else %>
+              <%= current_user.name %>
+              <li class="pull-right"><%= link_to('', destroy_user_session_path, :method => :delete, :class => "glyphicon glyphicon-log-out") %></a></li>
+              <% end %>
+              <% else %>
+              <li class="pull-right"><%= link_to('', new_user_session_path, :class => "glyphicon glyphicon-log-in")  %></a></li>
+              <% end %></li>
+        </ul>
+        <%= form_tag(index_index_path, method: :get, :class => 'form-inline my-2 my-lg-0', role: 'search') do %>
+          <%= text_field_tag :term, "", class: "form-control mr-sm-2" %>
+          <%= submit_tag 'Search', class: "fix-btn btn btn-outline-success my-2 my-sm-0"  %>
+        <% end %>
+
+</div>
+  </nav>
+    </div>
+  <%= yield %>
+
+  </body>
+</html>

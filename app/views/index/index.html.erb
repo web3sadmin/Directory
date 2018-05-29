@@ -1,0 +1,194 @@
+<div class="container">
+<h1>Справочник</h1>
+<br/>
+
+<tr>
+</tr>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col"><%= sortable "name" %></th>
+      <th scope="col">Почта</th>
+      <th scope="col">Телефон</th>
+      <th scope="col">Мобильный тел.</th>
+      <th scope="col">Городской тел.</th>
+      <% if user_signed_in? %>
+      <% if current_user.admin? %>
+      <th scope="col">sAMAccountName</th>
+      <th scope="col">Управление</th>
+      <% end %>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+<% @indexes.each do |user| %>
+
+<% if user.registered %>
+  <tr class='<% if user.registered %><% else %>success<% end %>'>
+    <td><%= link_to "#{user.name}", user %></td>
+
+
+    <td><%= mail_to user.mail %></td>
+    <td><%= user.telephoneNumber %></td>
+    <td><%= user.mobile %></td>
+    <td><%= user.ipphone %></td>
+    <% if user_signed_in? %>
+      <% if current_user.admin? %>
+        <td><%= user.sAMAccountName %></td>
+        <td><%= link_to 'Удалить', user, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
+        <!--<td><%= link_to 'Редактировать', edit_index_path(user) %></td>-->
+        <td><%= link_to 'Редактировать',  '#', 'data-target' => "#edit_#{user.id}", 'data-toggle' => 'modal'  %></td>
+        <!-- The Modal -->
+        <div class="modal" id='<%= "edit_#{user.id}" %>'>
+          <div class="modal-dialog">
+            <div class="modal-content loginmodal-container">
+
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Редактирование данных сотрудника</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+
+              <!-- Modal body -->
+              <div class="modal-body">
+        <%= render 'index/form', variable: user %>
+      </div>
+    </div>
+  </div>
+      <% end %>
+      <% end %>
+
+    </tr>
+    <% else %>
+    <% if user_signed_in? %>
+      <% if current_user.admin? %>
+      <tr class='<% if user.registered %><% else %>success<% end %>'>
+        <td><%= link_to "#{user.name}", user %></td>
+
+
+        <td><%= mail_to user.mail %></td>
+        <td><%= user.telephoneNumber %></td>
+        <td><%= user.mobile %></td>
+        <td><%= user.ipphone %></td>
+        <% if user_signed_in? %>
+          <% if current_user.admin? %>
+            <td><%= user.sAMAccountName %></td>
+            <td><%= link_to 'Удалить', user, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
+            <!--<td><%= link_to 'Редактировать', edit_index_path(user) %></td>-->
+            <td><%= link_to 'Редактировать',  '#', 'data-target' => "#edit_#{user.id}", 'data-toggle' => 'modal'  %></td>
+            <!-- The Modal -->
+            <div class="modal" id='<%= "edit_#{user.id}" %>'>
+              <div class="modal-dialog">
+                <div class="modal-content loginmodal-container">
+
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                    <h4 class="modal-title">Редактирование данных сотрудника</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+
+                  <!-- Modal body -->
+                  <div class="modal-body">
+            <%= render 'index/form', variable: user %>
+          </div>
+        </div>
+      </div>
+          <% end %>
+          <% end %>
+
+        </tr>
+      <% end %>
+      <% end %>
+    <% end %>
+    <% end %>
+
+</div>
+<% if user_signed_in? %>
+  <% if current_user.admin? %>
+  <!-- Button to Open the Modal -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    Добавить пользователя
+  </button>
+  <% end %>
+  <% end %>
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content loginmodal-container">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Добавление нового пользователя</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <%= form_for @indexnew, url: index_index_path, method: "post", remote: true do |form| %>
+
+            <div class="field">
+            <%= form.text_field :name, :size => 50, :placeholder => "ФИО" %>
+            </div>
+            <div class="field">
+            <%= form.text_field :telephoneNumber, :placeholder => "Телефон" %>
+            </div>
+            <div class="field">
+            <%= form.text_field :physicalDeliveryOfficeName, :placeholder => "Кабинет" %>
+            </div>
+            <div class="field">
+            <%= form.text_field :description, :placeholder => "Описание" %>
+            </div>
+            <div class="field">
+            <%= form.text_field :displayName, :placeholder => "Отображаемое имя" %>
+            </div>
+            <div class="field">
+            <%= form.text_field :mail, :placeholder => "Почта" %>
+            </div>
+            <div class="field">
+            <%= form.text_field :department, :placeholder => "Отдел" %>
+            </div>
+            <div class="field">
+            <%= form.text_field :title, :placeholder => "Должность" %>
+            </div>
+            <div class="field">
+            <%= form.text_field :company, :placeholder => "Компания" %>
+            </div>
+            <div class="field">
+            <%= form.text_field :mobile, :placeholder => "Мобильный тел." %>
+            </div>
+            <div class="field">
+            <%= form.text_field :ipphone, :placeholder => "Городской тел." %>
+            </div>
+            <div class="field">
+            <%= form.text_field :homephone, :placeholder => "Личный тел." %>
+            </div>
+            <div class="field">
+            <%= form.label :cloudUser, :value => "Пользователь облака" %>
+            <%= form.check_box :cloudUser, id: :index_cloudUser %></br>
+            <%= form.label :usbUser, :value => "Пользователь сменных носителей" %>
+            <%= form.check_box :usbUser, id: :index_usbUser %></br>
+            <%= form.label :userit, :value => "Пользователь IT" %>
+            <%= form.check_box :userit, id: :index_userit %>
+            <% if user_signed_in? %>
+            <% if current_user.admin? %>
+            <%= form.label :registered, :value => "Отображать в справочнике" %>
+            <%= form.check_box :registered, id: :index_userit %>
+            <% end %>
+            <% end %>
+            </div>
+              <div class="actions">
+                <%= form.submit "Готово", :class => "login loginmodal-submit" %>
+              </div>
+            <% end %>
+      </div>
+    </div>
+  </div>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>

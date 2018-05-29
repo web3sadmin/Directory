@@ -1,0 +1,61 @@
+
+
+        <%= form_with(model: variable, local: true) do |form| %>
+
+            <div class="field">
+            <%= form.text_field :name, :size => 50, :placeholder => "ФИО" %>
+            </div>
+            <div class="field">
+            <%= form.text_field :telephoneNumber, :placeholder => "Телефон" %>
+            </div>
+            <div class="field">
+            <%= form.text_field :physicalDeliveryOfficeName, :placeholder => "Кабинет" %>
+            </div>
+            <div class="field">
+            <%= form.text_field :description, :placeholder => "Описание" %>
+            </div>
+            <div class="field">
+            <%= form.text_field :displayName, :placeholder => "Отображаемое имя" %>
+            </div>
+            <div class="field">
+            <%= form.text_field :mail, :placeholder => "Почта" %>
+            </div>
+            <div class="field">
+            <%= form.text_field :department, :placeholder => "Отдел" %>
+            </div>
+            <div class="field">
+            <%= form.text_field :title, :placeholder => "Должность" %>
+            </div>
+            <div class="field">
+            <%= form.text_field :company, :placeholder => "Компания" %>
+            </div>
+            <div class="field">
+            <%= form.text_field :mobile, :placeholder => "Мобильный тел." %>
+            </div>
+            <div class="field">
+            <%= form.text_field :ipphone, :placeholder => "Городской тел." %>
+            </div>
+            <div class="field">
+            <%= form.text_field :homephone, :placeholder => "Личный тел." %>
+            </div>
+            <div class="field">
+            <%= form.label :cloudUser, :value => "Пользователь облака" %>
+            <%= form.check_box :cloudUser, id: :index_cloudUser %></br>
+            <%= form.label :usbUser, :value => "Пользователь сменных носителей" %>
+            <%= form.check_box :usbUser, id: :index_usbUser %></br>
+            <%= form.label :userit, :value => "Пользователь IT" %>
+            <%= form.check_box :userit, id: :index_userit %>
+            <% if user_signed_in? %>
+            <% if current_user.admin? %>
+            <%= form.label :registered, :value => "Отображать в справочнике" %>
+            <%= form.check_box :registered, id: :index_userit %>
+            <% end %>
+            <% end %>
+            </div>
+              <div class="actions">
+                <%= form.submit "Готово", :class => "login loginmodal-submit" %>
+              </div>
+            <% end %>
+      </div>
+    </div>
+  </div>

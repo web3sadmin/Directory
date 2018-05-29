@@ -1,0 +1,2 @@
+class LdapManager < ApplicationRecord
+end

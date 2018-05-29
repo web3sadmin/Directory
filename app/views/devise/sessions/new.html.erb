@@ -1,0 +1,29 @@
+
+<div class="modal-dialog">
+  <div class="loginmodal-container">
+    <h2>Войдите в систему</h2>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="field">
+    <%= f.text_field :username, :placeholder => "Логин", autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.password_field :password, :placeholder => "Пароль", autocomplete: "off" %>
+  </div>
+
+  <!--<% if devise_mapping.rememberable? -%>
+    <div class="field">
+      <%= f.check_box :remember_me %>
+      Запомнить меня
+    </div>
+  <% end -%>
+-->
+
+    <%= f.submit "Войти", :class => "login loginmodal-submit" %>
+
+<% end %>
+
+
+
+</div>
+</div>

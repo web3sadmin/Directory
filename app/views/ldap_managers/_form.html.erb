@@ -1,0 +1,17 @@
+<%= form_with(model: ldap_manager, local: true) do |form| %>
+  <% if ldap_manager.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(ldap_manager.errors.count, "error") %> prohibited this ldap_manager from being saved:</h2>
+
+      <ul>
+      <% ldap_manager.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,93 @@
+<div class="container">
+      <div class="row">
+      <div class="col-md-5  toppad  pull-right col-md-offset-3 ">
+      </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+
+
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title"><%= @index.name %></h3>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-3 col-lg-3 " align="center">
+                  <% if File.file?("public/images/avatars/#{@index.sAMAccountName}.jpg") %>
+                  <%= image_tag("/images/avatars/#{@index.sAMAccountName}.jpg", alt: "", class: "img-circle img-responsive")%>
+                  <% else %>
+                  <%= image_tag("/images/avatars/photo.jpg", alt: "", class: "img-circle img-responsive")%>
+                  <% end %>
+                </div>
+                <div class=" col-md-9 col-lg-9 ">
+                  <table class="table table-user-information">
+                    <tbody>
+                      <tr>
+                        <td>Должность:</td>
+                        <td><%= @index.title%></td>
+                      </tr>
+                      <tr>
+                        <td>Отдел:</td>
+                        <td><%= @index.department%></td>
+                      </tr>
+                      <tr>
+                        <td>Телефон</td>
+                        <td><%= @index.telephoneNumber%></td>
+                      </tr>
+                      <tr>
+                        <td>Кабинет</td>
+                        <td><%= @index.physicalDeliveryOfficeName %></td>
+                      </tr>
+                      <tr>
+                        <td>Мобильный тел.</td>
+                        <td><%= @index.mobile %></td>
+                      </tr>
+                        <tr>
+                        <td>Городской тел.</td>
+                        <td><%= @index.ipphone %></td>
+                      </tr>
+                      <tr>
+                        <td>Email</td>
+                        <td><%=mail_to @index.mail%></td>
+                      </tr>
+                      <% if user_signed_in? %>
+                      <% if current_user.admin? %>
+                      <tr>
+                        <td>sAMAccountName</td>
+                        <td><%= @index.sAMAccountName %></td>
+                      </tr>
+                      <tr>
+                        <td>Пользователь IT</td>
+                        <td><%= "Да" if @index.userit %></td>
+                      </tr>
+                      <tr>
+                        <td>Открыт USB</td>
+                        <td><%= "Да" if @index.usbUser %></td>
+                      </tr>
+                      <tr>
+                        <td>Пользователь Cloud </td>
+                        <td><%= "Да" if @index.cloudUser %></td>
+                      </tr>
+                      <tr>
+                        <td>Зарегестрированный пользователь </td>
+                        <td><%= "Да" if @index.registered %></td>
+                      </tr>
+                      <% end %>
+                      <% end %>
+                    </tbody>
+                  </table>
+
+
+                </div>
+              </div>
+            </div>
+                 <div class="panel-footer">
+                   <%= link_to 'Назад', index_index_path %>
+                        <span class="pull-right">
+                            ЧАО Плутон 2018 г.
+                        </span>
+                    </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
