@@ -19,6 +19,8 @@ class CreateIndices < ActiveRecord::Migration[5.1]
       t.boolean :cloudUser
       t.boolean :usbUser
       t.boolean :userit
+      t.string :sAMAccountName
+      t.boolean :registered
 
       t.timestamps
     end

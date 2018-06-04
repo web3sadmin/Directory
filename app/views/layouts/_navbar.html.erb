@@ -1,10 +1,5 @@
-<% if user_signed_in? %>
-<% if current_user.admin? %>
 <ul class="nav navbar-nav">
   <li class="<%= 'active' if request.env['PATH_INFO'] == "/" %>"><a href="/">Справочник</a></li>
   <li class="<%= 'active' if request.env['PATH_INFO'] == "/users" %>"><a href="/users">Пользователи</a></li>
-  <li class="<%= 'active' if request.env['PATH_INFO'] == "/ldap_managers" %>"><a href="/ldap_managers">АД</a></li>
+  <li class="<%= 'active' if request.env['PATH_INFO'] == "/ldap_managers" %>"><a href="/ldap_managers">AD</a></li>
 </ul>
-
-<% end %>
-<% end %>

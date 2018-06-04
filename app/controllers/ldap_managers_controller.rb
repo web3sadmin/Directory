@@ -7,27 +7,14 @@ before_action :set_index, only: [:show, :edit, :update, :destroy]
     @directory = Index.all
     @index = Index.new
     @ldap_managers = LdapManager.all
-    ldap = Net::LDAP.new	:host => "dc-01.pluton.biz",
-                :port => 389,
-                :encryption => :none,
-                :base => "DC=pluton,DC=biz",
-                :auth => {
-                  :method => :simple,
-                  :username => "mikle.admin@pluton.biz",
-                  :password => "3ssqA3uh"
-                }
-                filter = Net::LDAP::Filter.eq("sAMAccountName", "*")
-                filter2 = Net::LDAP::Filter.eq("objectCategory", "organizationalPerson")
-                joined_filter = Net::LDAP::Filter.join(filter, filter2)
-                treebase = "ou=запорожье,dc=pluton,dc=biz"
-    @ldusers = ldap.search(:base => treebase, :filter => joined_filter, :return_result => true)
+    @ldusers = ldapConnector
   end
+
   def create
       @index = Index.new(index_params)
-
       respond_to do |format|
         if @index.save
-          format.html { redirect_to request.referrer, notice: 'Index was successfully created.' }
+          format.html { redirect_to request.referrer, notice: 'Учетная запись пользователя создана успешно.' }
           format.json { render :show, status: :created, location: @index }
         else
           format.html { render :new }
@@ -37,22 +24,7 @@ before_action :set_index, only: [:show, :edit, :update, :destroy]
     end
 
     def import_all
-      ldap = Net::LDAP.new	:host => "dc-01.pluton.biz",
-      						:port => 389,
-      						:encryption => :none,
-      						:base => "DC=pluton,DC=biz",
-      						:auth => {
-      							:method => :simple,
-      							:username => "mikle.admin@pluton.biz",
-      							:password => "3ssqA3uh"
-      						}
-
-                  filter = Net::LDAP::Filter.eq("sAMAccountName", "*")
-                  filter2 = Net::LDAP::Filter.eq("objectCategory", "organizationalPerson")
-                  joined_filter = Net::LDAP::Filter.join(filter, filter2)
-                  treebase = "ou=запорожье,dc=pluton,dc=biz"
-      @ldusers = ldap.search(:base => treebase, :filter => joined_filter, :return_result => true)
-      @ldusers.each do |ldap|
+      ldapConnector.each do |ldap|
                   pluton_worker = Index.new
                   pluton_worker.name = ldapadap(ldap, :name)
                   pluton_worker.givenName = ldapadap(ldap, :givenName)
@@ -80,23 +52,47 @@ before_action :set_index, only: [:show, :edit, :update, :destroy]
       redirect_to request.referrer, notice: "Импорт завершен."
     end
 
-    def matching
-
+    def import_photo
+      ldapConnector.each do |data|
+        [:thumbnailphoto, :jpegphoto, :photo].each do |photo_key|
+          if data.attribute_names.include?(photo_key)
+            photo_save(ldapadap(data, :sAMAccountName),data.thumbnailPhoto[0])
+          end
+        end
+      end
+      redirect_to request.referrer, notice: 'Фотографии загружены'
     end
     private
     # Use callbacks to share common setup or constraints between actions.
+    def ldapConnector
+      ldap = Net::LDAP.new
+      ldap.host = LDAP_CONFIG['host']
+      ldap.port = LDAP_CONFIG['port']
+      ldap.auth LDAP_CONFIG['admin_user'], LDAP_CONFIG['admin_password']
+      filter = Net::LDAP::Filter.eq("sAMAccountName", "*")
+      filter2 = Net::LDAP::Filter.eq("objectCategory", "organizationalPerson")
+      joined_filter = Net::LDAP::Filter.join(filter, filter2)
+      treebase = LDAP_CONFIG['group_base']
+      ldusers = ldap.search(:base => treebase, :filter => joined_filter, :return_result => true)
+      return ldusers
+    end
+
     def set_index
       @index = Index.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def index_params
-      params.require(:name).permit(:name, :givenName, :sn, :sAMAccountName, :displayName, :description, :physicalDeliveryOfficeName, :telephoneNumber, :mail, :title, :department, :company, :ipphone, :mobile, :homephone, :photo, :cloudUser, :usbUser, :userit)
+    def photo_save(name,data)
+        File.open('public/images/avatars/'+name+'.jpg', 'wb') { |f| f.write(data) }
     end
+
     def ldapadap(data,key)
       begin
         data[key].to_s.delete('"[]"')
       rescue
       end
+    end
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def index_params
+      params.require(:name).permit(:name, :givenName, :sn, :sAMAccountName, :displayName, :description, :physicalDeliveryOfficeName, :telephoneNumber, :mail, :title, :department, :company, :ipphone, :mobile, :homephone, :photo, :cloudUser, :usbUser, :userit)
     end
 end

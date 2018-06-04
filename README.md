@@ -1,25 +1,27 @@
-# README
+# Описание
+Данное приложение представляет из себя справочник. Данные для справочника берутся из Active Directory.
+Справочник позволяет имортировать пользователей из AD в свою БД, каждая запись может редактироваться по желанию.
+Так же приложение отображает разницу в записях между БД и AD, что позваляет кадровой службе добавлять в справочник новых сотрудников, что будет видно системному администратору, и обладая полной информацией о пользователе позволяет без лишней волокиты добавлять пользователя в AD и видеть соответствия или не соответствия.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+#Возможности
+Приложение позволяет имортировать фото из AD
+Позволяет импортировать все учетные записи или по отдельности
+Позволяет создавать пользователей непостредственно в справочнике, что несколько упращает работу системного администратора, и избавляет от необходимости разработки бюракратической процедуры регистрации учетных данных пользователя в AD
+Работает сортировка по полям.
+Работает поиск по всем полям.
 
-Things you may want to cover:
+#Настройка
+Приложение настроено на работу с MySQL но вы можете использовать любую другую БД на ваше усмотрение
+Для настройки подключения к AD необходимо отредактировать файл /config/ldap.yml
+Например:
+development:
+  host: 101.10.10.5
+  port: 389
+  attribute: sAMAccountName
+  base: dc=contoso,dc=com
+  admin_user: "imperator"
+  admin_password: Password
+  ssl: false
+  group_base: ou=workers,dc=contoso,dc=com
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-"# Directory" 
+  

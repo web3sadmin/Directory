@@ -52,6 +52,7 @@ gem "devise"
 gem "devise_ldap_authenticatable"
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
+gem 'jquery-turbolinks'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'bcrypt-ruby', '3.0.0', :require => 'bcrypt'
 gem 'bootstrap-wysihtml5-rails'

@@ -2,7 +2,8 @@
 <h1>Сравнение записей АД и Справочника</h1>
 
 <div>
-<%= button_to "Имортировать всех пользователей", import_all_ldap_managers_path(:all), :action => 'import_all' , :class => 'btn btn-danger', data: { confirm:'Вы уверены, что хотите имортировать всех пользователей? Новые пользователи будут добавлены к существующим!' } %>
+<%= button_to "Имортировать всех пользователей", import_all_ldap_managers_path(:all), :action => 'import_all', :class => 'btn btn-danger in-line', data: { confirm:'Вы уверены, что хотите имортировать всех пользователей? Новые пользователи будут добавлены к существующим!' } %>
+<%= button_to "Импортировать фотографии", import_photo_ldap_managers_path, :action => 'import_photo', :class => 'btn btn-danger in-line mrgin' %>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -55,7 +56,7 @@
         <%= hidden_field :name, :mobile, :value => ldapadap(ldap, :mobile) %>
         <%= hidden_field :name, :homephone, :value => ldapadap(ldap, :homephone) %>
         <%= hidden_field :name, :registered, :value => true %>
-        <td><%= f.submit "Добавить в справочник", :class => "btn btn-warning" %></td>
+        <td><%= f.submit "Добавить в справочник", :class => "btn btn-primary" %></td>
         <% end %>
       </tr>
     <% end %>

@@ -15,7 +15,16 @@
         <div class="navbar-header">
             <a class="navbar-brand" href="/">Справочник</a>
         </div>
-        <%= render 'layouts/navbar' %>
+        <% if user_signed_in? %>
+          <% if current_user.admin? %>
+            <%= render 'layouts/navbar' %>
+          <% else %>
+            <% if current_user.id = 1 %>
+              <%= render 'layouts/navbar' %>
+            <% end %>
+          <% end %>
+        <% end %>
+
         <ul class="nav navbar-nav navbar-right">
           <li id="notice" class="next"><a href="#"><%= notice %></a></li>
           <li style="padding-top: 16px;">

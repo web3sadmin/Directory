@@ -5,7 +5,7 @@ class IndexController < ApplicationController
 def index
 
       @indexes = if params[:term]
-        Index.where('name LIKE ?', "%#{params[:term]}%")
+        Index.where('name LIKE ? OR mail LIKE ? OR telephoneNumber LIKE?', "%#{params[:term]}%", "%#{params[:term]}%", "%#{params[:term]}%")
       else
         Index.order(sort_column + " " + sort_direction)
       end

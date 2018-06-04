@@ -18,4 +18,5 @@ module ApplicationHelper
   direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
   link_to index_index_path, {:sort => column, :direction => direction}, {:class => css_class}
 end
+
 end
