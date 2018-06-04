@@ -32,9 +32,9 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
   address:              '10.1.10.13',
   port:                 25,
-  domain:               'pluton.ua',
-  user_name:            'mikle.simonenko',
-  password:             '3ssqA3uh',
+  domain:               'contoso.com',
+  user_name:            'mikle',
+  password:             'password',
   authentication:       'plain',
   openssl_verify_mode: 'none',
   enable_starttls_auto: true }
