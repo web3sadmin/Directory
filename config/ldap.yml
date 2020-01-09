@@ -1,12 +1,12 @@
 development:
-  host: 101.10.10.5
+  host: 192.168.0.207
   port: 389
   attribute: sAMAccountName
-  base: dc=contoso,dc=com
-  admin_user: "imperator"
-  admin_password: Password
+  base: dc=parallel,dc=ua
+  admin_user: cn=boyko
+  admin_password: 
   ssl: false
-  group_base: ou=workers,dc=contoso,dc=com
+  group_base: ou=Users,ou=Office_Users,dc=office,dc=parallel,dc=ua
   # <<: *AUTHORIZATIONS
 
 test:
@@ -20,11 +20,11 @@ test:
   # <<: *AUTHORIZATIONS
 
 production:
-  host: localhost
-  port: 636
-  attribute: cn
-  base: ou=people,dc=test,dc=com
-  admin_user: cn=admin,dc=test,dc=com
-  admin_password: admin_password
-  ssl: start_tls
+  host: 192.168.0.207
+  port: 389
+  attribute: sAMAccountName
+  base: dc=office,dc=parallel,dc=ua
+  admin_user: cn=boyko
+  admin_password: 
+  ssl: false
   # <<: *AUTHORIZATIONS
