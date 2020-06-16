@@ -1,12 +1,14 @@
 development:
-  host: 192.168.0.207
+  host: office.parallel.ua
   port: 389
   attribute: sAMAccountName
-  base: dc=parallel,dc=ua
-  admin_user: cn=boyko
-  admin_password: 
+  base: dc=office,dc=parallel,dc=ua
+# admin_user: "test"
+# admin_password: P@ssw0rd
+  admin_user: "directory"
+  admin_password: amGe2Lgk0xTE
   ssl: false
-  group_base: ou=Users,ou=Office_Users,dc=office,dc=parallel,dc=ua
+  #group_base: ou=Office_Users,dc=office,dc=parallel,dc=ua
   # <<: *AUTHORIZATIONS
 
 test:
@@ -23,8 +25,9 @@ production:
   host: 192.168.0.207
   port: 389
   attribute: sAMAccountName
-  base: dc=office,dc=parallel,dc=ua
-  admin_user: cn=boyko
-  admin_password: 
+  base: ou=users,ou=Office_Users,dc=office,dc=parallel,dc=ua
+  admin_user: boyko
+  admin_password:
   ssl: false
   # <<: *AUTHORIZATIONS
+  #cn=boyko,dc=office,dc=parallel,dc=ua

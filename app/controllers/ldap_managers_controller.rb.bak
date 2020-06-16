@@ -13,8 +13,8 @@ before_action :set_index, only: [:show, :edit, :update, :destroy]
                 :base => "DC=office,DC=parallel,DC=ua",
                 :auth => {
                   :method => :simple,
-                  :username => "directory",
-                  :password => "amGe2Lgk0xTE"
+                  :username => "test",
+                  :password => "P@ssw0rd"
                 }
                 filter = Net::LDAP::Filter.eq("sAMAccountName", "*")
                 filter2 = Net::LDAP::Filter.eq("objectCategory", "organizationalPerson")
@@ -43,8 +43,8 @@ before_action :set_index, only: [:show, :edit, :update, :destroy]
                 :base => "DC=office,DC=parallel,DC=ua",
                 :auth => {
                   :method => :simple,
-                  :username => "directory",
-                  :password => "amGe2Lgk0xTE"
+                  :username => "test",
+                  :password => "P@ssw0rd"
                 }
                 filter = Net::LDAP::Filter.eq("sAMAccountName", "*")
                 filter2 = Net::LDAP::Filter.eq("objectCategory", "organizationalPerson")
@@ -86,8 +86,8 @@ before_action :set_index, only: [:show, :edit, :update, :destroy]
                 :base => "DC=office,DC=parallel,DC=ua",
                 :auth => {
                   :method => :simple,
-                  :username => "directory",
-                  :password => "amGe2Lgk0xTE"
+                  :username => "test",
+                  :password => "P@ssw0rd"
                 }
                 filter = Net::LDAP::Filter.eq("sAMAccountName", "*")
                 filter2 = Net::LDAP::Filter.eq("objectCategory", "organizationalPerson")
@@ -112,8 +112,8 @@ before_action :set_index, only: [:show, :edit, :update, :destroy]
                 :base => "DC=office,DC=parallel,DC=ua",
                 :auth => {
                   :method => :simple,
-                  :username => "directory",
-                  :password => "amGe2Lgk0xTE"
+                  :username => "test",
+                  :password => "P@ssw0rd"
                 }
                 filter = Net::LDAP::Filter.eq("sAMAccountName", "*")
                 filter2 = Net::LDAP::Filter.eq("objectCategory", "organizationalPerson")
