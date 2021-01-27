@@ -26,8 +26,8 @@ production:
   port: 389
   attribute: sAMAccountName
   base: ou=users,ou=Office_Users,dc=office,dc=parallel,dc=ua
-  admin_user: boyko
-  admin_password:
+  admin_user: "directory"
+  admin_password: amGe2Lgk0xTE
   ssl: false
   # <<: *AUTHORIZATIONS
   #cn=boyko,dc=office,dc=parallel,dc=ua

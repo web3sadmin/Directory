@@ -1,7 +1,6 @@
 <div class="container">
 <h1>Справочник</h1>
 <br/>
-
 <tr>
 </tr>
 <table class="table table-striped sortable">
@@ -12,6 +11,7 @@
       <th scope="col">Телефон</th>
       <th scope="col">Мобильный тел.</th>
       <th scope="col">Городской тел.</th>
+      <th scope="col">Отдел</th>
       <% if user_signed_in? %>
       <% if current_user.admin? %>
       <th scope="col">sAMAccountName</th>
@@ -32,6 +32,7 @@
     <td><%= user.telephoneNumber %></td>
     <td><%= user.mobile %></td>
     <td><%= user.ipphone %></td>
+    <td><%= user.department %></td>
     <% if user_signed_in? %>
       <% if current_user.admin? %>
         <td><%= user.sAMAccountName %></td>
