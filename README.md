@@ -20,6 +20,8 @@ Rails 5.1.6
 Для запуска в режиме daemon записать в puma.rb daemonize true
 
 # INSTALL
+sudo yum install mysql-devel
+
 rbenv install -v 2.5.0
 rbenv rehash
 rbenv install -v 2.4.4
@@ -27,7 +29,6 @@ rbenv rehash
 rbenv install -v 2.4.1
 rbenv rehash
 rbenv global 2.4.4
-gem install bundler
 rbenv global 2.5.0
 gem install rails
 rbenv rehash
@@ -36,6 +37,5 @@ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB8
 curl -sSL https://get.rvm.io | bash -s stable
 source /etc/profile.d/rvm.sh
 rvm install rails
-sudo yum install mysql-devel
 cd app
 bundle install
