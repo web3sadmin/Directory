@@ -36,7 +36,7 @@ Rails 5.1.6
 
 * curl -sSL https://get.rvm.io | bash -s stable
 * source /etc/profile.d/rvm.sh
-* rvm install rails
+* gem install rails
 * cd app
 * bundle install
 * cd Directory
