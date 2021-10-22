@@ -40,5 +40,5 @@ Rails 5.1.6
 * cd app
 * bundle install
 * cd Directory
-* bundle exec rake db:reset db:setup db:migrate
-* rails s 
+* rbenv global 2.4.1
+* bundle exec rake db:reset db:setup db:migrate rails s 
