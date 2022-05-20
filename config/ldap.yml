@@ -1,5 +1,5 @@
 development:
-  host: office.parallel.ua
+  host: dc.example.com
   port: 389
   attribute: sAMAccountName
   base: dc=domain,dc=example,dc=com
@@ -22,7 +22,7 @@ test:
   # <<: *AUTHORIZATIONS
 
 production:
-  host: 192.168.0.207
+  host: 192.168.0.201
   port: 389
   attribute: sAMAccountName
   base: ou=Office_Users,dc=example,dc=org,dc=ua
@@ -30,4 +30,4 @@ production:
   admin_password: P@ssword
   ssl: false
   # <<: *AUTHORIZATIONS
-  #cn=boyko,dc=office,dc=parallel,dc=ua
+
