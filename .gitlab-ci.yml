@@ -20,7 +20,6 @@ before_script:
   - apt-get install -y nodejs
   - gem install bundler
   - bundle update --bundler
-  - bundle update --nokogiri  
 
 test:
   stage: test
