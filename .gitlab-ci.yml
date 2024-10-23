@@ -20,6 +20,7 @@ before_script:
   - apt-get install -y nodejs
   - gem install bundler
   - bundle install
+  - bundle update --bundler
 
 test:
   stage: test
@@ -37,5 +38,5 @@ test:
 # image: ruby:3.1
 #  script:
 #    - ssh user@your-server "cd /path/to/app && git pull && bundle install && RAILS_ENV=production bundle exec rails db:migrate && RAILS_ENV=production bundle exec rails assets:precompile && touch tmp/restart.txt"
-  only:
+#  only:
 #    - main
