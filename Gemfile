@@ -8,7 +8,7 @@ end
 # Install manager dependencies
 gem 'bundler',
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "~> 7.0.3"
+gem 'rails',
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.3.18', '< 0.6.0'
 # Use Puma as the app server
