@@ -21,7 +21,7 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'therubyracer', platforms: :ruby
 
 # See https://rubygems.org/gems/nokogiri/versions/1.16.7
-gem 'nokogiri', '~> 1.10.5', '>= 1.16.7'
+gem 'nokogiri'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
