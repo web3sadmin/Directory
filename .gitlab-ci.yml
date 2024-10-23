@@ -19,7 +19,8 @@ before_script:
   - curl -sSL https://deb.nodesource.com/setup_14.x | bash -
   - apt-get install -y nodejs
   - gem install bundler
-  - bundle update --bundler  
+  - bundle update --bundler
+  - bundle update nokogiri  
 
 test:
   stage: test
