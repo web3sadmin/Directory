@@ -35,7 +35,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'mini_portile2', '~> 2.8', '>= 2.8.7'
 
-gem 'rubyzip', '~> 3.0'
+gem 'rubyzip', '2.4.rc1'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

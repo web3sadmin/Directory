@@ -20,6 +20,7 @@ before_script:
   - apt-get install -y nodejs
   - gem install bundler
   - bundle install
+  - bundle update
   - bundle update --bundler
 
 test:
@@ -29,7 +30,7 @@ test:
     - mariadb:10.5
   script:
     - cp config/database.yml.gitlab-ci config/database.yml
-    - bundle exec rails db:create RAILS_ENV=test
+    - bundle exec rails db:create RAILS_ENV=test --trace
     - bundle exec rails db:schema:load RAILS_ENV=test
     - bundle exec rspec
 
