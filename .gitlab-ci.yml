@@ -19,6 +19,7 @@ before_script:
   - curl -sSL https://deb.nodesource.com/setup_14.x | bash -
   - apt-get install -y nodejs
   - gem install bundler
+  - bundle install
   - bundle update --bundler
 
 test:
