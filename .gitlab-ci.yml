@@ -1,6 +1,6 @@
 stages:
   - test
-  - deploy
+#  - deploy
 
 variables:
   MYSQL_DATABASE: myapp_test
