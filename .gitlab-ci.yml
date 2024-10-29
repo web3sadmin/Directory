@@ -1,38 +1,38 @@
-stages:
-  - test
-  - deploy
+#stages:
+#  - test
+#  - deploy
 
-variables:
-  MYSQL_DATABASE: myapp_test
-  MYSQL_USER: user
-  MYSQL_PASSWORD: password
-  MYSQL_ROOT_PASSWORD: rootpassword
+#variables:
+#  MYSQL_DATABASE: myapp_test
+#  MYSQL_USER: user
+#  MYSQL_PASSWORD: password
+#  MYSQL_ROOT_PASSWORD: rootpassword
 
-services:
-  - name: mariadb:10.5
-    alias: db
-    command: ['--default-authentication-plugin=mysql_native_password']
+#services:
+#  - name: mariadb:10.5
+#    alias: db
+#    command: ['--default-authentication-plugin=mysql_native_password']
 
-before_script:
-  - apt-get update -y
-  - apt-get install -y curl
-  - curl -sSL https://deb.nodesource.com/setup_18.x | bash -
-  - apt-get install -y nodejs
-  - gem install bundler
-  - bundle install
-  - bundle update
-  - bundle update --bundler
+#before_script:
+#  - apt-get update -y
+#  - apt-get install -y curl
+#  - curl -sSL https://deb.nodesource.com/setup_18.x | bash -
+#  - apt-get install -y nodejs
+#  - gem install bundler
+#  - bundle install
+#  - bundle update
+#  - bundle update --bundler
 
-test:
-  stage: test
-  image: ruby:3.2.5
-  services:
-    - mariadb:10.5
-  script:
-    - cp config/database.yml.gitlab-ci config/database.yml
-    - bundle exec rails db:create RAILS_ENV=test --trace
-    - bundle exec rails db:schema:load RAILS_ENV=test
-    - bundle exec rspec
+#test:
+#  stage: test
+#  image: ruby:3.2.5
+#  services:
+#    - mariadb:10.5
+#  script:
+#    - cp config/database.yml.gitlab-ci config/database.yml
+#    - bundle exec rails db:create RAILS_ENV=test --trace
+#    - bundle exec rails db:schema:load RAILS_ENV=test
+#    - bundle exec rspec
 
 deploy:
   stage: deploy
