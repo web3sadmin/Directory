@@ -34,10 +34,10 @@
 #    - bundle exec rails db:schema:load RAILS_ENV=test
 #    - bundle exec rspec
 
-deploy:
-  stage: deploy
-  image: ruby:3.2.5
-  script:
-    - ssh user@your-server "cd /app && git pull && bundle install && RAILS_ENV=production bundle exec rails db:migrate && RAILS_ENV=production bundle exec rails assets:precompile && touch tmp/restart.txt"
-  only:
-    - main
+#deploy:
+#  stage: deploy
+#  image: ruby:3.2.5
+#  script:
+#    - ssh user@your-server "cd /app && git pull && bundle install && RAILS_ENV=production bundle exec rails db:migrate && RAILS_ENV=production bundle exec rails assets:precompile && touch tmp/restart.txt"
+#  only:
+#    - main
