@@ -15,7 +15,7 @@ services:
 
 before_script:
   - apt-get update -y
-  - apt-get install -y curl
+  - apt-get install -y curl ruby-dev build-essential
   - curl -sSL https://deb.nodesource.com/setup_18.x | bash -
   - apt-get install -y nodejs
   - gem install bundler

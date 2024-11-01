@@ -1,0 +1,10 @@
+
+1. apt-get install ruby-dev build-essential
+
+2. apt-get install libyaml-dev
+
+apt-get install libmysqlclient-dev
+
+gem update --system
+gem install bundler
+bundle update

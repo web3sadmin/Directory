@@ -8,9 +8,9 @@ end
 # Install manager dependencies
 gem 'bundler'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails'
+gem 'rails', '7.2.2'
 # Use mysql as the database for Active Record
-gem 'mysql2', '>= 0.3.18', '< 0.6.0'
+gem 'mysql2', '>= 0.5.6', '< 0.6.0'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
@@ -37,9 +37,9 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'mini_portile2', '~> 2.8', '>= 2.8.7'
 
-gem 'rails'
-
 gem 'rubyzip', '2.4.rc1'
+
+gem 'bigdecimal'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
