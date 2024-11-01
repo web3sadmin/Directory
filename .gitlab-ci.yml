@@ -1,38 +1,38 @@
-#stages:
-#  - test
-#  - deploy
+stages:
+  - test
+  - deploy
 
-#variables:
-#  MYSQL_DATABASE: myapp_test
-#  MYSQL_USER: user
-#  MYSQL_PASSWORD: password
-#  MYSQL_ROOT_PASSWORD: rootpassword
+variables:
+  MYSQL_DATABASE: myapp_test
+  MYSQL_USER: user
+  MYSQL_PASSWORD: password
+  MYSQL_ROOT_PASSWORD: rootpassword
 
-#services:
-#  - name: mariadb:10.5
-#    alias: db
-#    command: ['--default-authentication-plugin=mysql_native_password']
+services:
+  - name: mariadb:10.5
+    alias: db
+    command: ['--default-authentication-plugin=mysql_native_password']
 
-#before_script:
-#  - apt-get update -y
-#  - apt-get install -y curl
-#  - curl -sSL https://deb.nodesource.com/setup_18.x | bash -
-#  - apt-get install -y nodejs
-#  - gem install bundler
-#  - bundle install
-#  - bundle update
-#  - bundle update --bundler
+before_script:
+  - apt-get update -y
+  - apt-get install -y curl
+  - curl -sSL https://deb.nodesource.com/setup_18.x | bash -
+  - apt-get install -y nodejs
+  - gem install bundler
+  - bundle install
+  - bundle update
+  - bundle update --bundler
 
-#test:
-#  stage: test
-#  image: ruby:3.2.5
-#  services:
-#    - mariadb:10.5
-#  script:
-#    - cp config/database.yml.gitlab-ci config/database.yml
-#    - bundle exec rails db:create RAILS_ENV=test --trace
-#    - bundle exec rails db:schema:load RAILS_ENV=test
-#    - bundle exec rspec
+test:
+  stage: test
+  image: ruby:3.2.5
+  services:
+    - mariadb:10.5
+  script:
+    - cp config/database.yml.gitlab-ci config/database.yml
+    - bundle exec rails db:create RAILS_ENV=test --trace
+    - bundle exec rails db:schema:load RAILS_ENV=test
+    - bundle exec rspec
 
 #deploy:
 #  stage: deploy
@@ -41,34 +41,38 @@
 #    - ssh user@your-server "cd /app && git pull && bundle install && RAILS_ENV=production bundle exec rails db:migrate && RAILS_ENV=production bundle exec rails assets:precompile && touch tmp/restart.txt"
 #  only:
 #    - main
-stages:          # List of stages for jobs, and their order of execution
-  - build
-  - test
-  - deploy
 
-build-job:       # This job runs in the build stage, which runs first.
-  stage: build
-  script:
-    - echo "Compiling the code..."
-    - echo "Compile complete."
 
-unit-test-job:   # This job runs in the test stage.
-  stage: test    # It only starts when the job in the build stage completes successfully.
-  script:
-    - echo "Running unit tests... This will take about 60 seconds."
-    - sleep 60
-    - echo "Code coverage is 90%"
 
-lint-test-job:   # This job also runs in the test stage.
-  stage: test    # It can run at the same time as unit-test-job (in parallel).
-  script:
-    - echo "Linting code... This will take about 10 seconds."
-    - sleep 10
-    - echo "No lint issues found."
 
-deploy-job:      # This job runs in the deploy stage.
-  stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
-  environment: production
-  script:
-    - echo "Deploying application..."
-    - echo "Application successfully deployed."
+#stages:          # List of stages for jobs, and their order of execution
+#  - build
+#  - test
+#  - deploy
+
+#build-job:       # This job runs in the build stage, which runs first.
+#  stage: build
+#  script:
+#    - echo "Compiling the code..."
+#    - echo "Compile complete."
+
+#unit-test-job:   # This job runs in the test stage.
+#  stage: test    # It only starts when the job in the build stage completes successfully.
+#  script:
+#    - echo "Running unit tests... This will take about 60 seconds."
+#    - sleep 60
+#    - echo "Code coverage is 90%"
+
+#lint-test-job:   # This job also runs in the test stage.
+#  stage: test    # It can run at the same time as unit-test-job (in parallel).
+#  script:
+#    - echo "Linting code... This will take about 10 seconds."
+#    - sleep 10
+#    - echo "No lint issues found."
+
+#deploy-job:      # This job runs in the deploy stage.
+#  stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
+#  environment: production
+#  script:
+#    - echo "Deploying application..."
+#    - echo "Application successfully deployed."
