@@ -1,13 +1,13 @@
 development:
-  host: dc.example.com
+  host: dc03.techlab.pp.ua
   port: 389
   attribute: sAMAccountName
-  base: dc=domain,dc=example,dc=com
+  base: ou=test,dc=techlab,dc=pp,dc=ua
 # admin_user: "test"
 # admin_password: P@ssw0rd
   admin_user: "directory"
-  admin_password: 
-  ssl: false
+  admin_password: P@ssw0rd 
+  #ssl: false
   #group_base: ou=Office_Users,dc=example,dc=org,dc=ua
   # <<: *AUTHORIZATIONS
 

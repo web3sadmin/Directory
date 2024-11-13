@@ -7,14 +7,14 @@ before_action :set_index, only: [:show, :edit, :update, :destroy]
     @directory = Index.all
     @index = Index.new
     @ldap_managers = LdapManager.all
-    ldap = Net::LDAP.new	:host => "office.parallel.ua",
+    ldap = Net::LDAP.new	:host => "dc03.techlab.pp.ua",
                 :port => 389,
                 :encryption => :none,
-                :base => "DC=office,DC=parallel,DC=ua",
+                :base => "DC=dc,DC=techalb,DC=pp,DC=ua",
                 :auth => {
                   :method => :simple,
                   :username => "directory",
-                  :password => "amGe2Lgk0xTE"
+                  :password => "P@ssw0rd"
                 }
                 filter = Net::LDAP::Filter.eq("sAMAccountName", "*")
                 filter2 = Net::LDAP::Filter.eq("objectCategory", "organizationalPerson")
@@ -37,19 +37,19 @@ before_action :set_index, only: [:show, :edit, :update, :destroy]
     end
 
     def import_all
-	ldap = Net::LDAP.new        :host => "office.parallel.ua",
+	ldap = Net::LDAP.new        :host => "dc03.techlab.pp.ua",
                 :port => 389,
                 :encryption => :none,
-                :base => "DC=office,DC=parallel,DC=ua",
+                :base => "DC=test,DC=techlab,DC=pp,DC=ua",
                 :auth => {
                   :method => :simple,
                   :username => "directory",
-                  :password => "amGe2Lgk0xTE"
+                  :password => "P@ssw0rd"
                 }
                 filter = Net::LDAP::Filter.eq("sAMAccountName", "*")
                 filter2 = Net::LDAP::Filter.eq("objectCategory", "organizationalPerson")
                 joined_filter = Net::LDAP::Filter.join(filter, filter2)
-                treebase = "OU=Office_Users,DC=office,DC=parallel,DC=ua"
+                treebase = "OU=test,DC=techlab,DC=pp,DC=ua"
     @ldusers = ldap.search(:base => treebase, :filter => joined_filter, :return_result => true)
       @ldusers.each do |ldap|
                   pluton_worker = Index.new
@@ -80,14 +80,14 @@ before_action :set_index, only: [:show, :edit, :update, :destroy]
     end
 
     def import_photo
-	ldap = Net::LDAP.new        :host => "office.parallel.ua",
+	ldap = Net::LDAP.new        :host => "dc03.techlab.pp.ua",
                 :port => 389,
                 :encryption => :none,
-                :base => "DC=office,DC=parallel,DC=ua",
+                :base => "DC=office,DC=techlab,DC=pp,DC=ua",
                 :auth => {
                   :method => :simple,
                   :username => "directory",
-                  :password => "amGe2Lgk0xTE"
+                  :password => ""
                 }
                 filter = Net::LDAP::Filter.eq("sAMAccountName", "*")
                 filter2 = Net::LDAP::Filter.eq("objectCategory", "organizationalPerson")
@@ -106,14 +106,14 @@ before_action :set_index, only: [:show, :edit, :update, :destroy]
     private
     # Use callbacks to share common setup or constraints between actions.
     def ldapConnector
-      ldap = Net::LDAP.new        :host => "office.parallel.ua",
+      ldap = Net::LDAP.new        :host => "dc03.techalab.pp.ua",
                 :port => 389,
                 :encryption => :none,
-                :base => "DC=office,DC=parallel,DC=ua",
+                :base => "DC=test,DC=techlab,DC=pp,DC=ua",
                 :auth => {
                   :method => :simple,
                   :username => "directory",
-                  :password => "amGe2Lgk0xTE"
+                  :password => ""
                 }
                 filter = Net::LDAP::Filter.eq("sAMAccountName", "*")
                 filter2 = Net::LDAP::Filter.eq("objectCategory", "organizationalPerson")

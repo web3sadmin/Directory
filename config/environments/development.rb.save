@@ -7,10 +7,10 @@ Rails.application.configure do
   config.cache_classes = false
 
   #Recommended: Disable That whiny crap in the development environment  
+
 # config.web_console.whiny_requests = false
 #  config.web_console.automount = true  
-  config.web_console.whitelisted_ips = '0.0.0.0/0' 	
-
+  config.web_console.whitelisted_ips=0.0.0.0/0
   # Do not eager load code on boot.
   config.eager_load = false
 

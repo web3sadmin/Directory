@@ -1,9 +1,10 @@
-
 <h1>Сравнение записей АД и Справочника</h1>
 
 <div>
-<%= button_to "Импортировать всех пользователей", import_all_ldap_managers_path(:all), :action => 'import_all', :class => 'btn btn-danger in-line', data: { confirm:'Вы уверены, что хотите имортировать всех пользователей? Новые пользователи будут добавлены к существующим!' } %>
-<%= button_to "Импортировать фотографии", import_photo_ldap_managers_path, :action => 'import_photo', :class => 'btn btn-danger in-line mrgin' %>
+  <%= button_to "Имортировать всех пользователей", import_all_ldap_managers_path(:all), :action => 'import_all', :class => 'btn btn-danger in-line', data: { confirm:'Вы уверены, что хотите имортировать всех пользователей? Новые пользователи будут добавлены к существующим!' } %>
+  <%= button_to "Импортировать фотографии", import_photo_ldap_managers_path, :action => 'import_photo', :class => 'btn btn-danger in-line mrgin' %>
+</div>
+
 <table class="table table-striped">
   <thead>
     <tr>
@@ -21,45 +22,75 @@
     </tr>
   </thead>
   <tbody>
-    <% @ldusers.each do |ldap| %>
-    <% @res = :danger %>
-    <% @directory.each do |dir| %>
-    <% if ldapadap(ldap, :sAMAccountName) == dir.sAMAccountName  %>
-      <% @res = :default %>
-    <% end %>
-    <% end %>
-      <tr class="<%= @res %>">
+    <% if @ldusers.present? %>  <!-- Check if @ldusers is present -->
+      <% @ldusers.each do |ldap| %>
         <% @res = :danger %>
-
-        <td class="<%= ldapadap(matching(@directory, ldap, :name),0) %>"><%= ldapadap(ldap, :name) %><br><%= ldapadap(matching(@directory, ldap, :name),1) %></td>
-        <td><%= ldapadap(ldap, :sn) %></td>
-        <td class="<%= ldapadap(matching(@directory, ldap, :displayName),0) %>"><%= ldapadap(ldap, :displayName) %><br><%= ldapadap(matching(@directory, ldap, :displayName),1) %></td>
-        <td class="<%= ldapadap(matching(@directory, ldap, :mail),0) %>"><%= mail_to ldapadap(ldap, :mail) %><br><%= ldapadap(matching(@directory, ldap, :mail),1) %></td>
-        <td class="<%= ldapadap(matching(@directory, ldap, :physicalDeliveryOfficeName),0) %>"><%= ldapadap(ldap, :physicalDeliveryOfficeName) %><br><%= ldapadap(matching(@directory, ldap, :physicalDeliveryOfficeName),1) %></td>
-        <td class="<%= ldapadap(matching(@directory, ldap, :telephoneNumber),0) %>"><%= ldapadap(ldap, :telephonenumber) %><br><%= ldapadap(matching(@directory, ldap, :telephoneNumber),1) %></td>
-        <td class="<%= ldapadap(matching(@directory, ldap, :title),0) %>"><%= ldapadap(ldap, :title) %><br><%= ldapadap(matching(@directory, ldap, :title),1) %></td>
-        <td class="<%= ldapadap(matching(@directory, ldap, :department),0) %>"><%= ldapadap(ldap, :department) %><br><%= ldapadap(matching(@directory, ldap, :department),1) %></td>
-        <td class="<%= ldapadap(matching(@directory, ldap, :ipphone),0) %>"><%= ldapadap(ldap, :ipphone) %><br><%= ldapadap(matching(@directory, ldap, :ipphone),1) %></td>
-        <td class="<%= ldapadap(matching(@directory, ldap, :mobile),0) %>"><%= ldapadap(ldap, :mobile) %><br><%= ldapadap(matching(@directory, ldap, :mobile),1) %></td>
-        <td class="<%= ldapadap(matching(@directory, ldap, :homephone),0) %>"><%= ldapadap(ldap, :homephone) %><br><%= ldapadap(matching(@directory, ldap, :homephone),1) %></td>
-        <%= form_for @index, url: {action: "create"} do |f| %>
-        <%= hidden_field :name, :name, :value => ldapadap(ldap, :name) %>
-        <%= hidden_field :name, :sAMAccountName, :value => ldapadap(ldap, :sAMAccountName) %>
-        <%= hidden_field :name, :sn, :value => ldapadap(ldap, :sn) %>
-        <%= hidden_field :name, :mail, :value => ldapadap(ldap, :mail) %>
-        <%= hidden_field :name, :displayName, :value => ldapadap(ldap, :displayName) %>
-        <%= hidden_field :name, :physicalDeliveryOfficeName, :value => ldapadap(ldap, :physicalDeliveryOfficeName) %>
-        <%= hidden_field :name, :telephoneNumber, :value => ldapadap(ldap, :telephoneNumber) %>
-        <%= hidden_field :name, :title, :value => ldapadap(ldap, :title) %>
-        <%= hidden_field :name, :department, :value => ldapadap(ldap, :department) %>
-        <%= hidden_field :name, :ipphone, :value => ldapadap(ldap, :ipphone) %>
-        <%= hidden_field :name, :mobile, :value => ldapadap(ldap, :mobile) %>
-        <%= hidden_field :name, :homephone, :value => ldapadap(ldap, :homephone) %>
-        <%= hidden_field :name, :registered, :value => true %>
-        <td><%= f.submit "Добавить в справочник", :class => "btn btn-primary" %></td>
+        <% if @directory.present? %>  <!-- Check if @directory is present -->
+          <% @directory.each do |dir| %>
+            <% if ldapadap(ldap, :sAMAccountName) == dir.sAMAccountName %>
+              <% @res = :default %>
+            <% end %>
+          <% end %>
         <% end %>
+        
+        <tr class="<%= @res %>">
+          <% @res = :danger %>
+
+          <td class="<%= ldapadap(matching(@directory, ldap, :name), 0) %>">
+            <%= ldapadap(ldap, :name) %><br><%= ldapadap(matching(@directory, ldap, :name), 1) %>
+          </td>
+          <td><%= ldapadap(ldap, :sn) %></td>
+          <td class="<%= ldapadap(matching(@directory, ldap, :displayName), 0) %>">
+            <%= ldapadap(ldap, :displayName) %><br><%= ldapadap(matching(@directory, ldap, :displayName), 1) %>
+          </td>
+          <td class="<%= ldapadap(matching(@directory, ldap, :mail), 0) %>">
+            <%= mail_to ldapadap(ldap, :mail) %><br><%= ldapadap(matching(@directory, ldap, :mail), 1) %>
+          </td>
+          <td class="<%= ldapadap(matching(@directory, ldap, :physicalDeliveryOfficeName), 0) %>">
+            <%= ldapadap(ldap, :physicalDeliveryOfficeName) %><br><%= ldapadap(matching(@directory, ldap, :physicalDeliveryOfficeName), 1) %>
+          </td>
+          <td class="<%= ldapadap(matching(@directory, ldap, :telephoneNumber), 0) %>">
+            <%= ldapadap(ldap, :telephonenumber) %><br><%= ldapadap(matching(@directory, ldap, :telephoneNumber), 1) %>
+          </td>
+          <td class="<%= ldapadap(matching(@directory, ldap, :title), 0) %>">
+            <%= ldapadap(ldap, :title) %><br><%= ldapadap(matching(@directory, ldap, :title), 1) %>
+          </td>
+          <td class="<%= ldapadap(matching(@directory, ldap, :department), 0) %>">
+            <%= ldapadap(ldap, :department) %><br><%= ldapadap(matching(@directory, ldap, :department), 1) %>
+          </td>
+          <td class="<%= ldapadap(matching(@directory, ldap, :ipphone), 0) %>">
+            <%= ldapadap(ldap, :ipphone) %><br><%= ldapadap(matching(@directory, ldap, :ipphone), 1) %>
+          </td>
+          <td class="<%= ldapadap(matching(@directory, ldap, :mobile), 0) %>">
+            <%= ldapadap(ldap, :mobile) %><br><%= ldapadap(matching(@directory, ldap, :mobile), 1) %>
+          </td>
+          <td class="<%= ldapadap(matching(@directory, ldap, :homephone), 0) %>">
+            <%= ldapadap(ldap, :homephone) %><br><%= ldapadap(matching(@directory, ldap, :homephone), 1) %>
+          </td>
+          <%= form_for @index, url: { action: "create" } do |f| %>
+            <%= hidden_field :name, :name, value: ldapadap(ldap, :name) %>
+            <%= hidden_field :name, :sAMAccountName, value: ldapadap(ldap, :sAMAccountName) %>
+            <%= hidden_field :name, :sn, value: ldapadap(ldap, :sn) %>
+            <%= hidden_field :name, :mail, value: ldapadap(ldap, :mail) %>
+            <%= hidden_field :name, :displayName, value: ldapadap(ldap, :displayName) %>
+            <%= hidden_field :name, :physicalDeliveryOfficeName, value: ldapadap(ldap, :physicalDeliveryOfficeName) %>
+            <%= hidden_field :name, :telephoneNumber, value: ldapadap(ldap, :telephoneNumber) %>
+            <%= hidden_field :name, :title, value: ldapadap(ldap, :title) %>
+            <%= hidden_field :name, :department, value: ldapadap(ldap, :department) %>
+            <%= hidden_field :name, :ipphone, value: ldapadap(ldap, :ipphone) %>
+            <%= hidden_field :name, :mobile, value: ldapadap(ldap, :mobile) %>
+            <%= hidden_field :name, :homephone, value: ldapadap(ldap, :homephone) %>
+            <%= hidden_field :name, :registered, value: true %>
+            <td><%= f.submit "Добавить в справочник", class: "btn btn-primary" %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="11">Нет данных для отображения</td>
       </tr>
     <% end %>
   </tbody>
 </table>
 <br>
+
